@@ -102,7 +102,7 @@ const HourlyForecast: React.FC<{
                 </div>
               );
             })}
-          {weatherData?.forecast.forecastday[1].hour.map((hour, index) => {
+          {weatherData?.forecast.forecastday[1].hour.map((hour) => {
             if (i > 0) {
               i--;
               return (
@@ -112,9 +112,7 @@ const HourlyForecast: React.FC<{
                   }}
                 >
                   <Forecast key={hour.time}>
-                    <ForecastTime>
-                      {index === 0 ? "Now" : hour.time.split(" ")[1]}
-                    </ForecastTime>
+                    <ForecastTime>{hour.time.split(" ")[1]}</ForecastTime>
                     <ForecastTemp>{hour.temp_c}°C</ForecastTemp>
                     <ForecastIcon>
                       <img

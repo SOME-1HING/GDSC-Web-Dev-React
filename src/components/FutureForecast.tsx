@@ -68,7 +68,7 @@ const FutureForecast: React.FC<{
         </Header>
 
         <ForecastContainer>
-          {weatherData?.forecast.forecastday.map((day) => {
+          {weatherData?.forecast.forecastday.map((day, index) => {
             const date = new Date(day.date);
             const days = [
               "Sunday",
@@ -81,10 +81,7 @@ const FutureForecast: React.FC<{
             ];
             let dayOfWeek = days[date.getDay()];
 
-            const today = new Date();
-            const todayDayOfWeek = days[today.getDay()];
-
-            if (dayOfWeek === todayDayOfWeek) {
+            if (index === 0) {
               dayOfWeek = "Today";
             }
 
