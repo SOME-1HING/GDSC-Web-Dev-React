@@ -71,11 +71,13 @@ const App = () => {
   const [backgroundImage, setBackgroundImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const API_KEY = import.meta.env.VITE_API_KEY;
+
   const handleSearchInputChange = async (newInputValue: string) => {
     setSearchInput(newInputValue);
     setIsLoading(true);
     const forecastWeatherResponse = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=${process.env.API_KEY}&q=${newInputValue}&days=10`
+      `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${newInputValue}&days=10`
     );
     const forecastWeatherData = await forecastWeatherResponse.json();
 
