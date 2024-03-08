@@ -13,6 +13,13 @@ const Wrapper = styled.div`
   margin-left: 5px;
   margin-right: 5px;
   background-color: rgba(0, 0, 0, 0.5);
+
+  @media (max-width: 768px) {
+    width: 80vw;
+    height: 25vh;
+    margin: 5px;
+    margin-top: 10px;
+  }
 `;
 
 export default Wrapper;

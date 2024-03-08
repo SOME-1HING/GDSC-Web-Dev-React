@@ -6,8 +6,10 @@ import WeatherData from "../context/WeatherData";
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding: 20px;
-  padding-left: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-left: 50px;
+  margin-right: 25px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -17,11 +19,11 @@ const Header = styled.div`
   align-items: center;
   justify-content: start;
   font-size: 1.2rem;
-  color: #70808d;
+  color: var(--title-color);
   padding-bottom: 10px;
   margin-right: 25px;
 
-  border-bottom: 1px solid #70808d;
+  border-bottom: 1px solid var(--title-color);
 
   svg {
     margin-right: 10px;

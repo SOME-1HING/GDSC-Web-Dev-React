@@ -6,6 +6,8 @@ import WeatherData from "../context/WeatherData";
 interface SearchBarProps {
   onInputChange: (newInputValue: string) => void;
   weatherData: WeatherData | null;
+  isError: boolean;
+  isLoading: boolean;
 }
 
 const Wrapper = styled.div`
@@ -49,11 +51,50 @@ const SearchInput = styled.input`
   letter-spacing: 1px;
   outline: none;
 `;
+const LoadingWrapper = styled.div`
+  display: flex;
+`;
+const LoadingCircle = styled.div`
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin: 6px;
+  animation: load 1.5s ease-in-out infinite;
+
+  @keyframes load {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+`;
+
+const LoadingCircle1 = styled(LoadingCircle)`
+  animation-delay: 0s;
+`;
+
+const LoadingCircle2 = styled(LoadingCircle)`
+  animation-delay: 0.33s;
+`;
+
+const LoadingCircle3 = styled(LoadingCircle)`
+  animation-delay: 0.66s;
+`;
+
 const SearchBar: React.FC<SearchBarProps> = ({
   onInputChange,
   weatherData,
+  isError,
+  isLoading,
 }) => {
   const [inputValue, setInputValue] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newInputValue = event.target.value;
@@ -62,21 +103,29 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
+      setIsSubmitted(true);
       onInputChange(inputValue);
     }
   };
 
   useEffect(() => {
-    if (weatherData) {
-      setInputValue(
-        weatherData.location.name +
-          ", " +
-          weatherData.location.region +
-          ", " +
-          weatherData.location.country
-      );
+    if (!isLoading) {
+      if (weatherData) {
+        setInputValue(
+          weatherData.location.name +
+            ", " +
+            weatherData.location.region +
+            ", " +
+            weatherData.location.country
+        );
+      }
+
+      if (isError) {
+        setInputValue("City not found!");
+      }
+      setIsSubmitted(false);
     }
-  }, [weatherData]);
+  }, [weatherData, isError, isSubmitted, isLoading]);
 
   return (
     <Wrapper>
@@ -89,6 +138,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
           onKeyDown={handleKeyDown}
           value={inputValue}
         />
+
+        {isLoading && (
+          <LoadingWrapper>
+            <LoadingCircle1 key={Math.random()} />
+            <LoadingCircle2 key={Math.random()} />
+            <LoadingCircle3 key={Math.random()} />
+          </LoadingWrapper>
+        )}
       </Container>
     </Wrapper>
   );

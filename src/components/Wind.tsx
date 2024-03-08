@@ -2,7 +2,16 @@ import styled from "styled-components";
 import Wrapper from "../context/WrapperStyle";
 import { FaCompass, FaWind } from "react-icons/fa";
 import WeatherData from "../context/WeatherData";
+const SuperWrapper = styled(Wrapper)`
+  width: 19vw;
 
+  @media (max-width: 768px) {
+    width: 80vw;
+    height: 25vh;
+    margin: 5px;
+    margin-top: 10px;
+  }
+`;
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -18,7 +27,7 @@ const Header = styled.div`
   align-items: center;
   justify-content: start;
   font-size: 1.2rem;
-  color: #70808d;
+  color: var(--title-color);
   margin-left: 15px;
 
   padding-bottom: 10px;
@@ -53,7 +62,7 @@ const WindWrapper = styled.div`
 const Separator = styled.div`
   width: 100%;
   height: 1px;
-  background-color: #70808d;
+  background-color: var(--title-color);
   margin: 10px 0;
 `;
 const WindSpeed = styled.div`
@@ -91,7 +100,7 @@ const WindContainerRight = styled.div`
   height: 100%;
 
   font-size: 2.2rem;
-  color: #b6daf8;
+  color: var(--title-color);
 `;
 
 const WindDirection = styled.div`
@@ -106,7 +115,7 @@ const Wind: React.FC<{
   weatherData: WeatherData | null;
 }> = ({ weatherData }) => {
   return (
-    <Wrapper style={{ width: "19vw" }}>
+    <SuperWrapper>
       <Container>
         <Header>
           <FaWind /> Wind
@@ -136,7 +145,7 @@ const Wind: React.FC<{
           </WindContainerRight>
         </SuperContainer>
       </Container>
-    </Wrapper>
+    </SuperWrapper>
   );
 };
 

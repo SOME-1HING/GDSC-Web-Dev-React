@@ -1,9 +1,35 @@
 :root {
   --default-grey: #34333d;
+  --title-color: #b6daf8b3;
 }
 
 * {
   font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
+}
+
+html {
+  scrollbar-width: normal;
+  scrollbar-color: #777 #555;
+}
+
+html::-webkit-scrollbar {
+  width: 4vw;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #7775;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
+}
+
+html::-webkit-scrollbar-track {
+  background-color: #5555;
+}
+
+html::-webkit-scrollbar-track:hover {
+  background-color: #555;
 }

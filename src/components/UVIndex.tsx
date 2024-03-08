@@ -5,11 +5,25 @@ import WeatherData from "../context/WeatherData";
 interface UVScaleProps {
   uvIndex: number | undefined;
 }
+
+const SuperWrapper = styled(Wrapper)`
+  width: 19vw;
+
+  @media (max-width: 768px) {
+    width: 80vw;
+    height: 25vh;
+    margin: 5px;
+    margin-top: 10px;
+  }
+`;
+
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding: 20px;
-  padding-left: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-left: 50px;
+  margin-right: 25px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -19,7 +33,7 @@ const Header = styled.div`
   align-items: center;
   justify-content: start;
   font-size: 1.2rem;
-  color: #70808d;
+  color: var(--title-color);
   padding-bottom: 10px;
   margin-right: 25px;
 
@@ -97,7 +111,7 @@ const UVIndex: React.FC<{
   }
 
   return (
-    <Wrapper style={{ width: "19vw" }}>
+    <SuperWrapper>
       <Container>
         <Header>
           <FaSun /> UV Index
@@ -112,7 +126,7 @@ const UVIndex: React.FC<{
           <UVScale uvIndex={weatherData?.current.uv} />
         </UVIndexContainer>
       </Container>
-    </Wrapper>
+    </SuperWrapper>
   );
 };
 

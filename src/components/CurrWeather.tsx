@@ -3,6 +3,7 @@ import WeatherData from "../context/WeatherData";
 import wisdom from "../utils/wisdom";
 import { FaCloudRain, FaEye, FaTemperatureHigh } from "react-icons/fa";
 import { FaDroplet } from "react-icons/fa6";
+import { MdLocationPin } from "react-icons/md";
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,6 +17,13 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 20px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 100%;
+    margin: 5px;
+    margin-top: 10px;
+  }
 `;
 
 const Top = styled.div`
@@ -31,13 +39,23 @@ const CurrentWeather = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
+
+  p {
+    display: flex;
+    color: var(--title-color);
+  }
+
+  * {
+    padding-bottom: 6px;
+  }
 `;
 
 const Temp = styled.div`
   font-size: 3rem;
   color: white;
   font-family: "Inter", sans-serif;
-  padding: 20px;
+  padding-top: 20px;
 `;
 
 const CurrCondition = styled.div`
@@ -66,11 +84,19 @@ const ConditionWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const ConditionWrapperLeft = styled.div`
+const ConditionWrapperTop = styled.div`
   display: flex;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
-const ConditionWrapperRight = styled.div`
+const ConditionWrapperBottom = styled.div`
   display: flex;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 const ConditionContainer = styled.div`
   width: 8vw;
@@ -84,11 +110,19 @@ const ConditionContainer = styled.div`
   flex-wrap: wrap;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.6);
+
+  @media (max-width: 1220px) {
+    flex-direction: row;
+  }
+  @media (max-width: 768px) {
+    width: 40vw;
+    height: 8vh;
+  }
 `;
 
 const ConditionHeader = styled.div`
   font-size: 0.8rem;
-  color: #70808d;
+  color: var(--title-color);
   width: 100%;
   display: flex;
   align-items: center;
@@ -97,6 +131,18 @@ const ConditionHeader = styled.div`
   svg {
     font-size: 1.5rem;
     margin-right: 5px;
+
+    @media (max-width: 1640px) {
+      font-size: 1rem;
+    }
+    @media (max-width: 1200px) {
+      font-size: 0.6rem;
+    }
+  }
+
+  @media (max-width: 1640px) {
+    font-size: 1rem;
+    font-size: 0.6rem;
   }
 `;
 
@@ -135,6 +181,10 @@ const CurrWeather: React.FC<{
                 <CurrCondition>
                   {weatherData["current"]["condition"]["text"]}
                 </CurrCondition>
+                <p>
+                  <MdLocationPin /> {weatherData.location.name},{" "}
+                  {weatherData.location.region}, {weatherData.location.country}
+                </p>
               </CurrentWeather>
             </div>
             <Tips>
@@ -146,7 +196,7 @@ const CurrWeather: React.FC<{
           </Top>
           <Bottom>
             <ConditionWrapper>
-              <ConditionWrapperLeft>
+              <ConditionWrapperTop>
                 <ConditionContainer>
                   <ConditionHeader>
                     <FaTemperatureHigh /> FEELS LIKE
@@ -163,8 +213,8 @@ const CurrWeather: React.FC<{
                     {weatherData["current"]["precip_mm"]}mm
                   </ConditionValue>
                 </ConditionContainer>
-              </ConditionWrapperLeft>
-              <ConditionWrapperRight>
+              </ConditionWrapperTop>
+              <ConditionWrapperBottom>
                 <ConditionContainer>
                   <ConditionHeader>
                     <FaEye /> VISIBILITY
@@ -181,7 +231,7 @@ const CurrWeather: React.FC<{
                     {weatherData["current"]["humidity"]}%
                   </ConditionValue>
                 </ConditionContainer>
-              </ConditionWrapperRight>
+              </ConditionWrapperBottom>
             </ConditionWrapper>
           </Bottom>
         </>
