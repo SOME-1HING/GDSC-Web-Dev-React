@@ -1,0 +1,9 @@
+:root {
+  --default-grey: #34333d;
+}
+
+* {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+}
