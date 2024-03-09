@@ -2,7 +2,7 @@ import "./App.css";
 import styled from "styled-components";
 import SearchBar from "./components/SearchBar";
 import CurrWeather from "./components/CurrWeather";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import WeatherData from "./context/WeatherData";
 import getBackground from "./utils/getBackground";
 import HourlyForecast from "./components/HourlyForecast";
@@ -117,16 +117,13 @@ const App = () => {
     }
 
     setWeatherData(forecastWeatherData);
+    setBackgroundImage(
+      getBackground(weatherData ? weatherData.current.condition.text : "")
+    );
     setError(false);
 
     setIsLoading(false);
   };
-
-  useEffect(() => {
-    setBackgroundImage(
-      getBackground(weatherData ? weatherData.current.condition.text : "")
-    );
-  }, [weatherData]);
 
   return (
     <Wrapper>
